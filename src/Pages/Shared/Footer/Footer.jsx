@@ -3,7 +3,7 @@ import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <div>
+    <div className="mt-16">
       <div className="text-[#FFFFFF]   px-8 py-6 bg-[#1F2937]  ">
         {/* top */}
         <div className="flex justify-between m-32 ">
