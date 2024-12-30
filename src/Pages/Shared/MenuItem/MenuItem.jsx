@@ -1,5 +1,4 @@
 import React from "react";
-import { BiBorderRadius } from "react-icons/bi";
 
 const MenuItem = ({ item }) => {
   const { name, recipe, image, price } = item;

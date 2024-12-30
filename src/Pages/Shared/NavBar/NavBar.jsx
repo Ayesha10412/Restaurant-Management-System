@@ -1,7 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
-  const navOptions = <></>;
+  const navOptions = (
+    <>
+      <Link to="/">Home</Link>
+      <Link to="/menu">Our Menu</Link>
+    </>
+  );
   return (
     <div>
       <div className="navbar bg-black fixed z-10 bg-opacity-30 max-w-screen-xl ">
@@ -25,7 +31,7 @@ const NavBar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content text-white rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               {navOptions}
             </ul>
@@ -38,7 +44,9 @@ const NavBar = () => {
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{navOptions}</ul>
+          <ul className="menu menu-horizontal px-1 text-[#ffffffea] text-sm gap-5 ">
+            {navOptions}
+          </ul>
         </div>
         <div className="navbar-end">
           <a className="btn">Button</a>
