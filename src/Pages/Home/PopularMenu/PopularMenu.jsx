@@ -17,7 +17,7 @@ const PopularMenu = () => {
   //     });
   // }, []);
   return (
-    <section className="mt-12  ">
+    <section className="mt-80  ">
       <SectionTitle heading="FROM OUR MENU" subHeading="Check it out" />
       <div className="grid grid-cols-2 gap-6">
         {popular.map((item) => (
