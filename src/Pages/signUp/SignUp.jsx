@@ -38,7 +38,7 @@ const SignUp = () => {
               />
               {errors.name && (
                 <span className="text-red-600 text-bold">
-                  This field is required
+                  This field is required!!
                 </span>
               )}
             </div>
@@ -48,12 +48,16 @@ const SignUp = () => {
               </label>
               <input
                 type="email"
-                {...register("email")}
+                {...register("email", { required: true })}
                 name="email"
                 placeholder="email"
                 className="input input-bordered"
-                required
               />
+              {errors.name && (
+                <span className="text-red-600 text-bold">
+                  Email is required!!
+                </span>
+              )}
             </div>
             <div className="form-control">
               <label className="label">
@@ -74,12 +78,18 @@ const SignUp = () => {
               </label>
               <input
                 type="password"
-                {...register("password")}
+                {...register("password", {
+                  required: true,
+                  minLength: 6,
+                  maxLength: 20,
+                })}
                 name="password"
                 placeholder="Password"
                 className="input input-bordered"
-                required
               />
+              {errors.password?.type === "required" && (
+                <p className="text-red-500 font-bold">Password is required!</p>
+              )}
             </div>
 
             <div className="form-control mt-6">
