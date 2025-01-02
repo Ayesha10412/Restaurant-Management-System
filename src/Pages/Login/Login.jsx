@@ -8,6 +8,7 @@ import {
 } from "react-simple-captcha";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 const Login = () => {
   const { user, signIn } = useContext(AuthContext);
   const captchaRef = useRef(null);
@@ -35,81 +36,86 @@ const Login = () => {
     }
   };
   return (
-    <div className="hero bg-base-200 min-h-screen">
-      <div className="hero-content flex-col md:flex-row gap-8">
-        <div className="text-center md:w-1/2 lg:text-left">
-          <h2 className="text-3xl font-bold text-black mb-4 text-center ">
-            Login Now!!
-          </h2>
-          <img src={loginImg} alt="" />
-        </div>
-        <div className="card bg-base-100 w-full max-w-sm md:w-1/2 shadow-2xl">
-          <form onSubmit={handleLogin} className="card-body">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                name="email"
-                placeholder="email"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <LoadCanvasTemplate />
-              </label>
-              <input
-                type="text"
-                name="captcha"
-                ref={captchaRef}
-                placeholder="Type the text above"
-                className="input input-bordered"
-                required
-              />
-              <button
-                onClick={handleValidateCaptcha}
-                className="btn btn-outline btn-xs mt-5"
-              >
-                {" "}
-                Validate{" "}
-              </button>
-              {/* <label className="label">
+    <>
+      <Helmet>
+        <title>Bistro Boss | SignIn page</title>
+      </Helmet>
+      <div className="hero bg-base-200 min-h-screen">
+        <div className="hero-content flex-col md:flex-row gap-8">
+          <div className="text-center md:w-1/2 lg:text-left">
+            <h2 className="text-3xl font-bold text-black mb-4 text-center ">
+              Login Now!!
+            </h2>
+            <img src={loginImg} alt="" />
+          </div>
+          <div className="card bg-base-100 w-full max-w-sm md:w-1/2 shadow-2xl">
+            <form onSubmit={handleLogin} className="card-body">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Email</span>
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="email"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Password</span>
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <LoadCanvasTemplate />
+                </label>
+                <input
+                  type="text"
+                  name="captcha"
+                  ref={captchaRef}
+                  placeholder="Type the text above"
+                  className="input input-bordered"
+                  required
+                />
+                <button
+                  onClick={handleValidateCaptcha}
+                  className="btn btn-outline btn-xs mt-5"
+                >
+                  {" "}
+                  Validate{" "}
+                </button>
+                {/* <label className="label">
                 
               </label> */}
-            </div>
-            <div className="form-control mt-6">
-              <input
-                disabled={disabled}
-                type="submit"
-                value="Login"
-                className="btn btn-primary"
-              />
-            </div>
-            <p className=" text-sm font-semibold  ">
-              New Here?{" "}
-              <Link className="underline hover:text-green-600" to="/signup">
-                Create An account!
-              </Link>{" "}
-            </p>
-          </form>
+              </div>
+              <div className="form-control mt-6">
+                <input
+                  disabled={disabled}
+                  type="submit"
+                  value="Login"
+                  className="btn btn-primary"
+                />
+              </div>
+              <p className=" text-sm font-semibold  ">
+                New Here?{" "}
+                <Link className="underline hover:text-green-600" to="/signup">
+                  Create An account!
+                </Link>{" "}
+              </p>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
