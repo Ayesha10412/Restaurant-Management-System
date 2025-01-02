@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import loginImg from "../../assets/others/authentication1.png";
 import {
   loadCaptchaEnginge,
@@ -6,7 +6,10 @@ import {
   LoadCanvasTemplateNoReload,
   validateCaptcha,
 } from "react-simple-captcha";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { Link } from "react-router-dom";
 const Login = () => {
+  const { user, signIn } = useContext(AuthContext);
   const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
   useEffect(() => {
@@ -17,6 +20,10 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
+    signIn(email, password).then((result) => {
+      const user = result.user;
+      console.log(user);
+    });
   };
 
   const handleValidateCaptcha = () => {
@@ -31,16 +38,13 @@ const Login = () => {
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col md:flex-row gap-8">
         <div className="text-center md:w-1/2 lg:text-left">
-          {/* <h1 className="text-5xl font-bold">Login now!</h1>
-          <p className="py-6  ">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p> */}
+          <h2 className="text-3xl font-bold text-black mb-4 text-center ">
+            Login Now!!
+          </h2>
           <img src={loginImg} alt="" />
         </div>
         <div className="card bg-base-100 w-full max-w-sm md:w-1/2 shadow-2xl">
-          <form onStalledCapture={handleLogin} className="card-body">
+          <form onSubmit={handleLogin} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -96,6 +100,12 @@ const Login = () => {
                 className="btn btn-primary"
               />
             </div>
+            <p className=" text-sm font-semibold  ">
+              New Here?{" "}
+              <Link className="underline hover:text-green-600" to="/signup">
+                Create An account!
+              </Link>{" "}
+            </p>
           </form>
         </div>
       </div>
