@@ -76,8 +76,9 @@ const NavBar = () => {
             {navOptions}
           </ul>
         </div>
-        <div className="navbar-end">
-          <a className="btn">Button</a>
+        <div className="navbar-end  ">
+          <span className="text-white text-xl mr-2 ">{user?.displayName}</span>
+          <img className="w-24 h-24 rounded-full" src={user?.photoURL} alt="" />
         </div>
       </div>
     </div>

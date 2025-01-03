@@ -1,23 +1,36 @@
 import React, { createContext, useContext } from "react";
 import loginImg from "../../assets/others/authentication1.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../Providers/AuthProvider";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
 
   const onSubmit = (data) => {
     createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
       console.log(loggedUser);
+      updateUserProfile(data.name, data.photoURL)
+        .then(() => {
+          reset();
+          toast.success("User created successfully!");
+          navigate("/");
+        })
+
+        .catch((error) => {
+          toast.error(error.message);
+        });
     });
   };
 
@@ -64,7 +77,7 @@ const SignUp = () => {
                   placeholder="email"
                   className="input input-bordered"
                 />
-                {errors.name && (
+                {errors.email && (
                   <span className="text-red-600 text-bold">
                     Email is required!!
                   </span>
@@ -76,12 +89,16 @@ const SignUp = () => {
                 </label>
                 <input
                   type="text"
-                  {...register("photoURL")}
+                  {...register("photoURL", { required: true })}
                   name="photoURL"
                   placeholder="PhotoURL"
                   className="input input-bordered"
-                  required
                 />
+                {errors.photoURL && (
+                  <span className="text-red-600 text-bold">
+                    Photo url is required!!
+                  </span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
