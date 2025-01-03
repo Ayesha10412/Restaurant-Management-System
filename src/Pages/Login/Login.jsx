@@ -7,13 +7,14 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 const Login = () => {
-  const { user, signIn } = useContext(AuthContext);
-
+  const { signIn } = useContext(AuthContext);
+  const location = useLocation();
   const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const [disabled, setDisabled] = useState(true);
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -27,7 +28,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         toast.success("Login Successful!");
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         toast.error(error.message);
@@ -36,6 +37,7 @@ const Login = () => {
 
   const handleValidateCaptcha = (e) => {
     const user_captcha_value = e.target.value;
+    console.log(user_captcha_value);
     console.log(user_captcha_value);
     if (validateCaptcha(user_captcha_value)) {
       setDisabled(false);
@@ -87,7 +89,7 @@ const Login = () => {
                   <LoadCanvasTemplate />
                 </label>
                 <input
-                  onClick={handleValidateCaptcha}
+                  onBlur={handleValidateCaptcha}
                   type="text"
                   name="captcha"
                   placeholder="Type the text above"
