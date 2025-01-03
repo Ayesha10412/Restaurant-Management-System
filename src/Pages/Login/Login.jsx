@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import loginImg from "../../assets/others/authentication1.png";
 import {
   loadCaptchaEnginge,
@@ -7,11 +7,13 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import toast from "react-hot-toast";
 const Login = () => {
   const { user, signIn } = useContext(AuthContext);
-  const captchaRef = useRef(null);
+
+  const navigate = useNavigate();
   const [disabled, setDisabled] = useState(true);
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -21,14 +23,20 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    signIn(email, password).then((result) => {
-      const user = result.user;
-      console.log(user);
-    });
+    signIn(email, password)
+      .then((result) => {
+        const user = result.user;
+        toast.success("Login Successful!");
+        navigate("/");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
-  const handleValidateCaptcha = () => {
-    const user_captcha_value = captchaRef.current.value;
+  const handleValidateCaptcha = (e) => {
+    const user_captcha_value = e.target.value;
+    console.log(user_captcha_value);
     if (validateCaptcha(user_captcha_value)) {
       setDisabled(false);
     } else {
@@ -79,20 +87,20 @@ const Login = () => {
                   <LoadCanvasTemplate />
                 </label>
                 <input
+                  onClick={handleValidateCaptcha}
                   type="text"
                   name="captcha"
-                  ref={captchaRef}
                   placeholder="Type the text above"
                   className="input input-bordered"
                   required
                 />
-                <button
+                {/* <button
                   onClick={handleValidateCaptcha}
                   className="btn btn-outline btn-xs mt-5"
                 >
                   {" "}
                   Validate{" "}
-                </button>
+                </button> */}
                 {/* <label className="label">
                 
               </label> */}
