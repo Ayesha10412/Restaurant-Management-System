@@ -12,10 +12,11 @@ import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 const Login = () => {
   const { signIn } = useContext(AuthContext);
+  const [disabled, setDisabled] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
-  const [disabled, setDisabled] = useState(true);
+  console.log("state in the location login page", location.state);
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -92,7 +93,7 @@ const Login = () => {
                   onBlur={handleValidateCaptcha}
                   type="text"
                   name="captcha"
-                  placeholder="Type the text above"
+                  placeholder="Type the above captcha "
                   className="input input-bordered"
                   required
                 />
@@ -109,7 +110,7 @@ const Login = () => {
               </div>
               <div className="form-control mt-6">
                 <input
-                  disabled={disabled}
+                  disabled={false}
                   type="submit"
                   value="Login"
                   className="btn btn-primary"
