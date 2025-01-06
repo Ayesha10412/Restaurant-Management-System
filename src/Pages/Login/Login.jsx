@@ -10,6 +10,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 const Login = () => {
   const { signIn } = useContext(AuthContext);
   const [disabled, setDisabled] = useState(true);
@@ -59,7 +60,7 @@ const Login = () => {
             </h2>
             <img src={loginImg} alt="" />
           </div>
-          <div className="card bg-base-100 w-full max-w-sm md:w-1/2 shadow-2xl">
+          <div className="card bg-base-100 w-full max-w-sm md:w-1/2 shadow-2xl  ">
             <form onSubmit={handleLogin} className="card-body">
               <div className="form-control">
                 <label className="label">
@@ -122,6 +123,7 @@ const Login = () => {
                   Create An account!
                 </Link>{" "}
               </p>
+              <SocialLogin></SocialLogin>
             </form>
           </div>
         </div>

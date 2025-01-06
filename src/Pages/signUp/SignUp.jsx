@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../Providers/AuthProvider";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -159,12 +160,13 @@ const SignUp = () => {
                   className="btn btn-primary"
                 />
               </div>
-              <p className=" text-sm font-semibold  ">
+              <p className=" text-sm font-semibold px-6 ">
                 Already have an account?{" "}
                 <Link className="underline hover:text-green-600" to="/login">
                   Login
                 </Link>{" "}
               </p>
+              <SocialLogin></SocialLogin>
             </form>
           </div>
         </div>
