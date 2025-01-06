@@ -11,7 +11,7 @@ import useCart from "../Hooks/useCart";
 const DashBoard = () => {
   const [cart] = useCart();
   return (
-    <div className="flex">
+    <div className="flex ">
       {/* side bar */}
       <div className="w-64 min-h-screen bg-orange-500">
         <ul className="menu p-4">

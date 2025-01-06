@@ -5,9 +5,11 @@ import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../Providers/AuthProvider";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -23,11 +25,21 @@ const SignUp = () => {
       console.log(loggedUser);
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          reset();
-          toast.success("User created successfully!");
-          navigate("/");
+          // create user entry in db
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+            photo: data.photoURL,
+          };
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user added successfully!");
+              reset();
+              toast.success("User created successfully!");
+              navigate("/");
+            }
+          });
         })
-
         .catch((error) => {
           toast.error(error.message);
         });
