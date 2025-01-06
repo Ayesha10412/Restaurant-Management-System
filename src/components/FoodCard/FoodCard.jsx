@@ -3,17 +3,18 @@ import useAuth from "../../Hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useCart from "../../Hooks/useCart";
 
 const FoodCard = ({ item }) => {
   const { name, image, recipe, price, _id } = item;
   const navigate = useNavigate();
   const location = useLocation();
+  const [, refetch] = useCart();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const handleAddToCart = (food) => {
     if (user && user?.email) {
       // send cart to the db
-      console.log("User", user?.email, food);
       const menuItem = {
         menuId: _id,
         email: user?.email,
@@ -31,6 +32,8 @@ const FoodCard = ({ item }) => {
             showConfirmButton: false,
             timer: 1500,
           });
+          // refetch cart to update the cart items count
+          refetch();
         }
       });
     } else {
