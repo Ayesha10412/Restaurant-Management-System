@@ -4,9 +4,11 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 import toast from "react-hot-toast";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../../Hooks/useCart";
+import useAdmin from "../../../Hooks/useAdmin";
 
 const NavBar = () => {
   const { user, logout } = useContext(AuthContext);
+  const [isAdmin] = useAdmin();
   const [cart] = useCart();
   const handleLogout = () => {
     logout()
@@ -22,7 +24,10 @@ const NavBar = () => {
       <Link to="/">Home</Link>
       <Link to="/menu">Our Menu</Link>
       <Link to="/order">Order Food</Link>
-      <Link to="/secret">Secret</Link>
+      {/* <Link to="/secret">Secret</Link> */}
+      {user && isAdmin && <Link to="/dashboard/adminHome">Dashboard</Link>}
+      {user && !isAdmin && <Link to="/dashboard/userHome">Dashboard</Link>}
+
       <Link to="/signup">SignUp</Link>
       <Link to="/dashboard/cart">
         <button className="btn ">
