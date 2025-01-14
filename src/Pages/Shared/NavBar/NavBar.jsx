@@ -73,7 +73,7 @@ const NavBar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content text-white rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content  rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               {navOptions}
             </ul>
@@ -91,7 +91,7 @@ const NavBar = () => {
           </ul>
         </div>
         <div className="navbar-end  ">
-          <span className="text-white text-xl mr-2 ">{user?.displayName}</span>
+          <span className="text-xl mr-2 ">{user?.displayName}</span>
           <img className="w-24 h-24 rounded-full" src={user?.photoURL} alt="" />
         </div>
       </div>

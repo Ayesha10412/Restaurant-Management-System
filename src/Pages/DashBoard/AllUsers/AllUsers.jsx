@@ -95,7 +95,7 @@ const AllUsers = () => {
                   ) : (
                     <button
                       onClick={() => handleMakeAdmin(user)}
-                      className="btn btn-ghost bg-orange-600 text-lg  text-white"
+                      className="btn btn-ghost bg-orange-600 text-lg  "
                     >
                       <FaUsers></FaUsers>
                     </button>
@@ -104,7 +104,7 @@ const AllUsers = () => {
                 <td>
                   <button
                     onClick={() => handleDeleteUser(user)}
-                    className="btn btn-ghost text-white  bg-red-600"
+                    className="btn btn-ghost  bg-red-600"
                   >
                     <FaTrash></FaTrash>
                   </button>

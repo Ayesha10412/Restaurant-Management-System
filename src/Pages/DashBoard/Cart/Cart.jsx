@@ -53,7 +53,7 @@ const Cart = () => {
         <table className="table">
           {/* head */}
           <thead>
-            <tr className="uppercase bg-[#D1A054] text-white font-bold text-xl ">
+            <tr className="uppercase bg-[#D1A054]  font-bold text-xl ">
               <th>#</th>
               <th>Item Image</th>
               <th>Item Name</th>
